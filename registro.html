@@ -5,15 +5,72 @@
 	<link rel='stylesheet' type='text/css' href='estilos/estilo_personal.css' />
 	<script>
 		function vervalores(){
-			var sAux="";
-			var frm = document.getElementById("registro");
-			for (i=0;i<frm.elements.length;i++)
-			{
-			sAux += "NOMBRE: " + frm.elements[i].name + " ";
-			sAux += "VALOR: " + frm.elements[i].value + "\n" ;
+			if(validacion_nombre()&&validacion_email()&&validacion_password()&&validacion_telefono()){
+				var sAux="";
+				var frm = document.getElementById("registro");
+				for (i=0;i<frm.elements.length;i++)
+				{
+				sAux += "NOMBRE: " + frm.elements[i].name + " ";
+				sAux += "VALOR: " + frm.elements[i].value + "\n" ;
+				}
+				alert(sAux);
+				return true;
+			}else{
+				return false;
 			}
-			alert(sAux);
 		}
+				
+		function validacion_nombre(){
+			var campo= document.getElementById("firstname").value;
+			if(campo==""){
+				alert("Rellenar el campo vacio Nombre");
+				return false;
+			}
+			return true;
+		}
+		
+		function validacion_email(){
+			var campo= document.getElementById("email").value;
+			var allowedEmail = /^([a-zA-Z]+\d{3})\@(ikasle.ehu)\.(es|eus)$/;
+			
+			if(campo==""){
+				alert("Rellenar el campo vacio Email");
+				return false;
+			}
+			else if(!allowedEmail.test(campo)){
+				alert("El campo email no cumple la especificación");
+				return false;
+			}
+			return true;
+		}
+		
+		function validacion_password(){
+			var campo= document.getElementById("password").value;
+			if(campo==""){
+				alert("Rellenar el campo vacio Password");
+				return false;
+			}
+			else if(campo.length<6){
+				alert("El campo Password debe tener al menos 6 caracteres");
+				return false;
+			}
+			return true;
+		}
+		
+		function validacion_telefono(){
+			var campo= document.getElementById("telephone").value;
+			var allowTelephone= /^\d{9}$/;
+			if(campo==""){
+				alert("Rellenar el campo vacio Telefono");
+				return false;
+			}
+			else if(!allowTelephone.test(campo)){
+				alert("El campo telefono debe tener 9 digitos");
+				return false;
+			}
+			return true;
+		}
+
 	</script>
 </head>
 <body>
@@ -26,29 +83,28 @@
 
 	<p><b>Los campos con * son obligatorios.</b></p><br><br>
 
-	<form enctype="multipart/form-data" id='registro' name='registro' onSubmit='vervalores()'>
+	<form enctype="multipart/form-data" id='registro' name='registro' onSubmit="return vervalores()">
 	  Nombre:*
-	  <input type="text" name="firstname" required><br><br>
-	  Apellidos:*
-	  <input type="text" name="lastname" required><br><br>
+	  <input type="text" name="firstname" id="firstname" onblur="return validacion_nombre()"><br><br>
 	  Email:*
-	  <input type="text" name="email" required><br><br>
+	  <input type="text" name="email" id="email" onblur="return validacion_email()"><br><br>
 	  Password:* 
-	  <input type="password" name="password" required><br><br>
+	  <input type="password" name="password" id="password" onblur="return validacion_password()"><br><br>
 	  Número de teléfono:*
-	  <input type="text" name="telephone" required><br><br>
+	  <input type="text" name="telephone" id="telephone" onblur="return validacion_telefono()"><br><br>
 	  Especialidad:*
-	  <select name="especialidad">
+	  <select name="especialidad" id="especialidad">
 		<option value="C">Computación</option>
 		<option value="IC">Ingeniería de Computadores</option>
 		<option value="IS">Ingeniería del Software</option>
-	  </select><br><br>
+	  </select> 
+	  <br><br>
 	  Tecnologias de interés:
-	  <input type="text" name="interes"><br><br>
+	  <input type="text" name="interes" id="tecnologia"><br><br>
 	  Imagen:
-	  <input name="uploadedfile" type="file"/><br><br>
+	  <input name="uploadedfile" id="imagen" type="file"/><br><br>
 	  
-	  <input type="submit" value="Enviar"/>
+	  <input type="submit" id="btn_elim" value="Enviar"/>
 	  
 	</form>
 
