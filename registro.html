@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 	<title>Registro</title>
 	<link rel='stylesheet' type='text/css' href='estilos/estilo_personal.css' />
 	<script>
 		function vervalores(){
-			if(validacion_nombre()&&validacion_email()&&validacion_password()&&validacion_telefono()){
+			if(validacion_nombre()&&validacion_email()&&validacion_password()&&validacion_telefono()&&validacion_especialidad()){
 				var sAux="";
 				var frm = document.getElementById("registro");
 				for (i=0;i<frm.elements.length;i++)
@@ -22,8 +22,13 @@
 				
 		function validacion_nombre(){
 			var campo= document.getElementById("firstname").value;
+			var allowedName = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$/;
 			if(campo==""){
 				alert("Rellenar el campo vacio Nombre");
+				return false;
+			}
+			else if(!allowedName.test(campo)){
+				alert("El campo nombre debe tener un nombre y dos apellidos");
 				return false;
 			}
 			return true;
@@ -38,7 +43,7 @@
 				return false;
 			}
 			else if(!allowedEmail.test(campo)){
-				alert("El campo email no cumple la especificaci�n");
+				alert("El campo email no cumple la especificación");
 				return false;
 			}
 			return true;
@@ -70,6 +75,47 @@
 			}
 			return true;
 		}
+		
+		function validacion_especialidad(){
+			var campo= document.getElementById("especialidad").value;
+			if(campo==""){
+				alert("Rellenar el campo vacio Especialidad");
+				return false;
+			}
+			return true;
+		}
+		
+		function addEspecialidad() {
+			var b = document.getElementById("btn_env");
+			var b1 = document.getElementById("btn_esp");
+			var sel = document.getElementById("especialidad");
+			var br1	= document.getElementById("s1");
+			var br2 = document.getElementById("s2");
+			
+			var campo_esp = document.createElement("input");	//Crea un elemento input
+			var b2 = document.createElement('button');	//Crea un elemento button
+			var br3= document.createElement('br');	//Crea un elemento br
+			var br4= document.createElement('br');
+			var txt_btn = document.createTextNode("Enviar");	//Crea un texto llamado Enviar
+			
+			campo_esp.setAttribute('name','especialidad');	//Añade un atributo 'name' llamado especialidad al elemento input creado antes.
+			campo_esp.setAttribute('id','especialidad');	//Añade un atributo 'id'llamado especialidad al elemento input
+			campo_esp.setAttribute('onblur','return validacion_especialidad()');	//Añade un atributo onblur que tiene por valor una funcion
+			
+			
+			padre = b.parentNode;	//Asignamos el nodo padre del elemento b a la variable padre.
+			padre.removeChild(b);	//Eliminamos del padre su nodo hijo b.
+			b1.parentNode.removeChild(b1);	// Otra forma de escribir lo anterior pero en una linea, esta vez con el nodo padre de b1.
+			sel.parentNode.removeChild(sel);
+			br1.parentNode.removeChild(br1);
+			br2.parentNode.removeChild(br2);
+			
+			b2.appendChild(txt_btn);	// Se añade un texto al elemento b2(button).
+			document.getElementById("registro").appendChild(campo_esp);	//Obtenemos el elemento con id=registro(formulario) y añadimos un hijo campo_esp(input)
+			document.getElementById("registro").appendChild(br3);
+			document.getElementById("registro").appendChild(br4);
+			document.getElementById("registro").appendChild(b2);			
+		}
 
 	</script>
 </head>
@@ -90,21 +136,23 @@
 	  <input type="text" name="email" id="email" onblur="return validacion_email()"><br><br>
 	  Password:* 
 	  <input type="password" name="password" id="password" onblur="return validacion_password()"><br><br>
-	  N�mero de tel�fono:*
+	  Número de teléfono:*
 	  <input type="text" name="telephone" id="telephone" onblur="return validacion_telefono()"><br><br>
-	  Especialidad:*
-	  <select name="especialidad" id="especialidad">
-		<option value="C">Computaci�n</option>
-		<option value="IC">Ingenier�a de Computadores</option>
-		<option value="IS">Ingenier�a del Software</option>
-	  </select> 
-	  <br><br>
-	  Tecnologias de inter�s:
+	  
+	  Tecnologias de interés:
 	  <input type="text" name="interes" id="tecnologia"><br><br>
 	  Imagen:
-	  <input name="uploadedfile" id="imagen" type="file"/><br><br>
+	  <input name="uploadedfile" id="imagen" type="file" accept="image/*"/><br><br>
+	  Especialidad:*
+	  <select name="especialidad" id="especialidad">
+		<option value="C">Computación</option>
+		<option value="IC">Ingeniería de Computadores</option>
+		<option value="IS">Ingeniería del Software</option>
+	  </select>
+	  <button type="button" id="btn_esp" onclick="addEspecialidad()">Cambiar especialidad</button>
+	  <br id="s1"><br id="s2">
 	  
-	  <input type="submit" id="btn_elim" value="Enviar"/>
+	  <input type="submit" id="btn_env" value="Enviar"/>
 	  
 	</form>
 

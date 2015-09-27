@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Registro 2da Version</title>
+	<link rel='stylesheet' type='text/css' href='estilos/estilo_personal.css' />
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script>
+		function vervalores(){
+			var sAux="";
+			var frm = document.getElementById("registro");
+			for (i=0;i<frm.elements.length;i++)
+			{
+				sAux += "NOMBRE: " + frm.elements[i].name + " ";
+				sAux += "VALOR: " + frm.elements[i].value + "\n" ;
+			}
+			alert(sAux);
+		}
+		
+		$(document).ready(function(){
+			$("#btn_esp").click(function(){
+				// Creacion de elementos html
+				var boton_enviar = $('<input/>', {
+					'type'	: 'submit',
+					'value'	: 'Enviar'
+				});
+				
+				var campo_esp = $('<input/>', {
+					'id'    : 'especialidad',
+					'title' : 'Se necesita una especialidad',
+					'type'	: 'text',
+					'name'	: 'especialidad',
+					'required' : 'true',
+					'pattern'	: "^[a-zA-Z]+$"
+				});
+				
+				var label_esp = $('<label/>', {
+					'title'    : 'Especialidad:*'
+				});
+				
+				// Eliminacion de elementos html
+				$("#btn_esp").remove();
+				$("#especialidad").remove();
+				$("#s1").remove();  $("#s2").remove();
+				
+				// Añadido los elementos antes del boton enviar
+				$("#btn_env").before(campo_esp);
+				$("#btn_env").before('<br><br>');
+			});
+			
+			function elegir_imagen(evt) {
+				var files = evt.target.files;
+				var f= files[0];
+				var reader = new FileReader();
+             
+				reader.onload = (function(theFile) {
+					return function(e) {
+						document.getElementById("im").innerHTML = ['<img src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
+					};
+				})(f);             
+				reader.readAsDataURL(f);
+			}
+            document.getElementById('imagen').addEventListener('change', elegir_imagen, false);
+		});
+	</script>
+</head>
+<body>
+
+<h2>Registro 2</h2><br>
+
+<p style="text-align:center"><a href='layout.html'>Volver inicio</a></p>
+
+<div class="centro">
+
+	<p><b>Los campos con * son obligatorios.</b></p><br><br>
+
+	<form enctype="multipart/form-data" id='registro' name='registro' onSubmit="return vervalores()">
+	  Nombre:*
+	  <input title="Se necesita un nombre y dos apellidos" type="text" name="firstname" id="firstname" pattern="(^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$)" required><br><br>
+	  Email:*
+	  <input title="Se necesita un email de la ehu/upv" type="text" name="email" id="email" pattern="(^([a-zA-Z])+(\d{3})+\@ikasle.ehu.e(u)?s$)" required><br><br>
+	  Password:* 
+	  <input title="Se necesita una contraseña de 6 caracteres" type="password" name="password" id="password" pattern="^([a-zA-Z\d]){6,}$" required><br><br>
+	  Número de teléfono:*
+	  <input title="Se necesita un número de 9 digitos" type="text" name="telephone" id="telephone" pattern="^(\d{9})$" required><br><br>
+	  
+	  Tecnologias de interés:
+	  <input type="text" name="interes" id="tecnologia"><br><br>
+	  Imagen:
+	  <input name="uploadedfile" id="imagen" type="file"/><br>
+	  <output id="im"></output>
+	  <br><br>
+	  Especialidad:*
+	  <select name="especialidad" id="especialidad">
+		<option value="C">Computación</option>
+		<option value="IC">Ingeniería de Computadores</option>
+		<option value="IS">Ingeniería del Software</option>
+	  </select>
+	  <button type="button" id="btn_esp">Cambiar especialidad</button>
+	  <br id="s1"><br id="s2">
+	  
+	  <input type="submit" id="btn_env" value="Enviar"/>
+	  
+	</form>
+
+</div>
+</body>
+</html>
