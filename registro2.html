@@ -65,7 +65,7 @@
 </head>
 <body>
 
-<h2>Registro 2</h2><br>
+<h2>Registro</h2><br>
 
 <p style="text-align:center"><a href='layout.html'>Volver inicio</a></p>
 
@@ -73,7 +73,7 @@
 
 	<p><b>Los campos con * son obligatorios.</b></p><br><br>
 
-	<form enctype="multipart/form-data" id='registro' name='registro' onSubmit="return vervalores()">
+	<form action="registrar.php" enctype="multipart/form-data" id='registro' name='registro' onSubmit="return vervalores()">
 	  Nombre:*
 	  <input title="Se necesita un nombre y dos apellidos" type="text" name="firstname" id="firstname" pattern="(^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$)" required><br><br>
 	  Email:*
