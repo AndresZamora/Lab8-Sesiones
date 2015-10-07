@@ -73,7 +73,7 @@
 
 	<p><b>Los campos con * son obligatorios.</b></p><br><br>
 
-	<form action="registrar.php" enctype="multipart/form-data" id='registro' name='registro' onSubmit="return vervalores()">
+	<form action="registrarConFoto.php" enctype="multipart/form-data" id='registro' name='registro' method="POST" onSubmit="return vervalores()">
 	  Nombre:*
 	  <input title="Se necesita un nombre y dos apellidos" type="text" name="firstname" id="firstname" pattern="(^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$)" required><br><br>
 	  Email:*
@@ -86,7 +86,7 @@
 	  Tecnologias de interés:
 	  <input type="text" name="interes" id="tecnologia"><br><br>
 	  Imagen:
-	  <input name="uploadedfile" id="imagen" type="file"/><br>
+	  <input name="imagen" id="imagen" type="file"/><br>
 	  <output id="im"></output>
 	  <br><br>
 	  Especialidad:*
