@@ -73,15 +73,18 @@
 
 	<p><b>Los campos con * son obligatorios.</b></p><br><br>
 
-	<form action="registrarConFoto.php" enctype="multipart/form-data" id='registro' name='registro' method="POST" onSubmit="return vervalores()">
+	<form action="registrar.php" enctype="multipart/form-data" id='registro' name='registro' onSubmit="return vervalores()">
 	  Nombre:*
-	  <input title="Se necesita un nombre y dos apellidos" type="text" name="firstname" id="firstname" pattern="(^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$)" required><br><br>
+	  <input title="Se necesita un nombre y dos apellidos" type="text" name="firstname" id="firstname" ><br><br>
+<!--	  pattern="(^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$)" required-->
 	  Email:*
-	  <input title="Se necesita un email de la ehu/upv" type="text" name="email" id="email" pattern="(^([a-zA-Z])+(\d{3})+\@ikasle.ehu.e(u)?s$)" required><br><br>
-	  Password:* 
-	  <input title="Se necesita una contraseña de 6 caracteres" type="password" name="password" id="password" pattern="^([a-zA-Z\d]){6,}$" required><br><br>
+	  <input title="Se necesita un email de la ehu/upv" type="text" name="email" id="email"><br><br>
+	  Password:*
+<!-- pattern="^([a-zA-Z\d]){6,}$" required-->
+	  <input title="Se necesita una contraseña de 6 caracteres" type="password" name="password" id="password"><br><br>
 	  Número de teléfono:*
-	  <input title="Se necesita un número de 9 digitos" type="text" name="telephone" id="telephone" pattern="^(\d{9})$" required><br><br>
+<!--	  pattern="^(\d{9})$" required-->
+	  <input title="Se necesita un número de 9 digitos" type="text" name="telephone" id="telephone"><br><br>
 	  
 	  Tecnologias de interés:
 	  <input type="text" name="interes" id="tecnologia"><br><br>
