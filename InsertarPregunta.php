@@ -1,11 +1,11 @@
-<?php include ("seguridad.php");?>
+﻿<?php include ("seguridad.php");?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Insertar Preguntas</title>
 	<link rel='stylesheet' type='text/css' href='estilos/estilo_personal.css' />
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-	
+
 </head>
 <body>
 
@@ -33,15 +33,20 @@
 					VALUES('$email','".$_POST['pregunta']."','".$_POST['respuesta']."')")) {
 					echo "<script>alert('ERROR: Fallo en la inserción de la pregunta');</script>";
 				}else{
-					echo "<script>alert('EXITO: Se ha insertado correctamente la pregunta');</script>";
+					echo "<div class='centro'>";
+					echo "<p><b>EXITO: Se ha insertado correctamente la pregunta</p></b><br> ";
+					echo "<p><a href='menu_usuario.php'>Volver al menu de usuario</a></p></div>";
+					
 				}
 		}else{
 			if (!mysqli_query($enlace,"INSERT INTO preguntas(Email,Pregunta,Respuesta,Complejidad) 
 					VALUES('$email','".$_POST['pregunta']."','".$_POST['respuesta']."','".$_POST['complex']."')")) {
 					echo "<script>alert('ERROR: Fallo en la inserción de la pregunta');</script>";
-				}else{
-					echo "<script>alert('EXITO: Se ha insertado correctamente la pregunta');</script>";
-				}
+			}else{
+					echo "<div class='centro'>";
+					echo "<p><b>EXITO: Se ha insertado correctamente la pregunta</p></b><br> ";
+					echo "<p><a href='menu_usuario.php'>Volver al menu de usuario</a></p></div>";
+			}
 			
 		}
 			
@@ -55,7 +60,7 @@
 
 	<p><b>Los campos con * son obligatorios.</b></p><br><br>
 
-	<form action="InsertarPreguntas.php" enctype="multipart/form-data" id='insertar' name='insertar' method="POST">
+	<form action="InsertarPregunta.php" enctype="multipart/form-data" id='insertar' name='insertar' method="POST">
 	  
 	  Texto de la Pregunta:*
 	  <input title="Pregunta" type="text" name="pregunta" id="pregunta" required><br><br>
@@ -63,7 +68,7 @@
 	  Texto de la Respuesta:*
 	  <input title="Respuesta" type="text" name="respuesta" id="respuesta" required><br><br>
 	
-	Complejidad:
+	  Complejidad:
 	  <select name="complex" id="complex">
 		<option value=""></option>
 		<option value="1">1</option>
@@ -76,7 +81,7 @@
 	 
 	  <input type="submit" id="btn_ins" value="Insertar Pregunta"/>
 	  
-	  <p style="text-align:center"><a href='menu_ususario.php'>Volver atrás</a></p>
+	  <p style="text-align:center"><a href='menu_usuario.php'>Volver atrás</a></p>
 	</form>
 
 	</div>

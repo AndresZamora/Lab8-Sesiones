@@ -6,10 +6,20 @@
     padding: 10px;
 }
 
-h2 {
+h1, h2 {
 	text-align: center;
 }
 
 table, th, td {
     border: 1px solid black;
 }
+
+.bloque{
+	margin: auto;
+	width: 30%;
+	text-align: center;
+	border:3px solid black;
+    padding: 10px;
+	background: -webkit-gradient(linear, 0 0,  0 100%, from(white), to(orange));
+	background-color: orange;
+ }
