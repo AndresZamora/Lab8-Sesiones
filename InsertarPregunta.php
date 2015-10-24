@@ -49,6 +49,13 @@
 			}
 			
 		}
+		
+		if (!mysqli_query($enlace,"INSERT INTO acciones(IdConexion,Email,TipoAccion,IpConexion) 
+					VALUES('".$_SESSION['ID']."','".$_SESSION['usuarioactual']."','Insertar pregunta','".$_SERVER['REMOTE_ADDR']."')")) {
+					echo "<script>alert('ERROR: Fallo en la inserción de la accion');</script>";
+			}		
+		
+		
 			
 			mysqli_close($enlace);	
 	}else{

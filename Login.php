@@ -27,9 +27,10 @@
 		$resultado = $enlace->query("SELECT Email, Password FROM usuario WHERE Email='$user' AND Password='$pass' ");
 		$cont= mysqli_num_rows($resultado);
 		
-		if($cont==1){
+		if($cont==1){			
 			$esta=1;
 			session_start();
+			include ("conexiones.php");
 			$_SESSION['conectado']=1 ;
 			$_SESSION['usuarioactual'] = $user; //nombre del usuario logueado.
 			echo "<script>alert('Usuario conectado correctamente')</script>";
