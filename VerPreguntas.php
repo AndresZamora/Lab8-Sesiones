@@ -12,6 +12,7 @@
 		echo "<p style='text-align:center'><a href='layout.html'>Volver a Inicio</a></p></br>";
 		
 		$enlace = mysqli_connect("localhost", "root", "", "Quiz");   //Conexion con la base de datos en local.
+	//	$enlace = mysqli_connect("mysql.hostinger.es", "u465939494_root", "quizes", "u465939494_quiz");		// Conexión con la base de datos en Hostinger.
 		
 		mysqli_set_charset($enlace, "utf8");
 		
@@ -33,6 +34,7 @@
 		echo "<p style='text-align:center'><a href='menu_usuario.php'>Volver a Menu Usuario</a></p>";
 		
 		$enlace = mysqli_connect("localhost", "root", "", "Quiz");   //Conexion con la base de datos en local.
+	//	$enlace = mysqli_connect("mysql.hostinger.es", "u465939494_root", "quizes", "u465939494_quiz");		// Conexión con la base de datos en Hostinger.
 		
 		mysqli_set_charset($enlace, "utf8");
 		
