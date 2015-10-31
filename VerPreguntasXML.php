@@ -13,7 +13,21 @@
 	}else{
 		echo "<p style='text-align:center'><a href='menu_usuario.php'>Volver a Menú Usuario</a></p></br>";
 	}
-
+		
+	// Código para mostrar el contenido del fichero xml en tablas usando transformaciones con xsl.	
+		
+	header('Content-Type: text/html; charset=UTF-8');
+	$xslDoc = new DOMDocument();
+	$xslDoc->load("VerPreguntas.xsl");
+	$xmlDoc = new DOMDocument();
+	$xmlDoc->load("preguntas.xml");
+	$proc = new XSLTProcessor();
+	$proc->importStylesheet($xslDoc);
+	echo $proc->transformToXML($xmlDoc);
+		
+/*	
+	// Código para mostrar el contenido del fichero xml en tablas usando SimpleXml.
+	
 	echo("<table style='width:100%'>
 		<tr>
 			<td><b>Pregunta</b></td>
@@ -34,7 +48,7 @@
 			<td>".$tema."</td>
 		</tr>");
 	}
-	echo("</table>");
+	echo("</table>");*/
 ?>
 </body>
 </html>
