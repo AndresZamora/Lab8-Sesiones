@@ -5,7 +5,7 @@
         <html>
             <body>
                 
-                <h2>Preguntas</h2>
+                <h2 style="text-align:center">Preguntas</h2>
                 <table border="1" style="margin: 0 auto;">
                     <tr bgcolor="skyblue">
                         <th>Pregunta</th>

@@ -1,7 +1,7 @@
 # Lab4-PHP-XML-XSL
 Laboratorio 4 sobre PHP, XML y XSL
 
--------------------------------------------------TAREAS OBLIGATORIAS-----------------------------------------------------
+-------------------------------------------------TAREAS OBLIGATORIAS---------------------------------------------------
 
 1. Modifica el script PHP (InsertarPregunta.php) para que además de guardar la pregunta
 en la BD, la incluya como un nuevo elemento <assessmentItem> del fichero preguntas.xml.
@@ -16,7 +16,7 @@ el contenido del fichero preguntas.xml. La tabla mostrará el enunciado, la comp
 la temática de cada pregunta.
 
 
---------------------------------------------------TAREAS OPCIONALES--------------------------------------------------------
+--------------------------------------------------TAREAS OPCIONALES----------------------------------------------------
 
 Tarea 1: Escribe una transformación XSL (VerPreguntas.xsl) para visualizar mediante una tabla
 html el contenido del fichero preguntas.xml. Modificar el fichero preguntas.xml para que

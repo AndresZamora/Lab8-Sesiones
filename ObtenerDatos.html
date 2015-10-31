@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Obtener Datos de Alumnos</title>
+	<link rel='stylesheet' type='text/css' href='estilos/estilo_personal.css' />
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script>
+		function completarFormulario() {
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					ColocarDatos(xmlhttp);
+				}
+			}		
+			xmlhttp.open("GET","usuarios.xml",true);
+			xmlhttp.send();
+		}
+		
+		function ColocarDatos(xml) {
+			var x, i, xmlDoc;
+			xmlDoc = xml.responseXML;
+			x = xmlDoc.getElementsByTagName("usuario");
+			i = 0;
+			var encontrado= false;
+			
+			while((i< x.length)&&(!encontrado)){
+				if(x[i].getElementsByTagName("email")[0].childNodes[0].nodeValue == document.getElementById("email").value){
+					document.getElementById("name").value = x[i].getElementsByTagName("nombre")[0].childNodes[0].nodeValue;
+					document.getElementById("apellido1").value = x[i].getElementsByTagName("apellido1")[0].childNodes[0].nodeValue;
+					document.getElementById("apellido2").value = x[i].getElementsByTagName("apellido2")[0].childNodes[0].nodeValue;
+					document.getElementById("telephone").value = x[i].getElementsByTagName("telefono")[0].childNodes[0].nodeValue;
+					encontrado=true;
+				}
+				i++;
+			}
+			
+			if(!encontrado){
+				document.getElementById("message").innerHTML = "<b><font color=red>El email no existe, se debe ingresar otro correo.</font></b>";
+				document.getElementById("name").value = "";
+				document.getElementById("apellido1").value = "";
+				document.getElementById("apellido2").value = "";
+				document.getElementById("telephone").value = "";
+			}else{
+				document.getElementById("message").innerHTML = "";
+			}
+		}
+		
+		
+	</script>
+</head>
+<body>
+
+<h2>Obtener Datos de Alumnos</h2><br>
+
+<p style="text-align:center"><a href='layout.html'>Volver inicio</a></p>
+
+<div class="centro">
+
+	<p><b>Los campos con * son obligatorios.</b></p><br><br>
+
+	<form action="" id='datos' name='datos'>
+	  Email:*
+	  <input title="Se necesita un email de la ehu/upv" type="text" name="email" id="email" required><br>
+	  <p id="message"></p>
+	  Nombre:
+	  <input type="text" name="name" id="name" ><br><br>
+	  Apellido1:
+	  <input type="text" name="apellido1" id="apellido1"><br><br>
+	  Apellido2:
+	  <input type="text" name="apellido2" id="apellido2"><br><br>
+	  Número de teléfono:
+	  <input type="text" name="telephone" id="telephone"><br><br>
+	  
+	  <button type="button" onclick="completarFormulario()">Completar</button>
+	</form>
+
+</div>
+</body>
+</html>
