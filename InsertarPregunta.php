@@ -1,16 +1,6 @@
-﻿<?php include ("seguridad.php");?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Insertar Preguntas</title>
-	<link rel='stylesheet' type='text/css' href='estilos/estilo_personal.css' />
-	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-
-</head>
-<body>
-
-	<?php
-	
+﻿
+<?php include ("seguridad.php");?>
+<?php
 	if (isset($_POST["pregunta"]) && isset($_POST["respuesta"])){
 		
 		$email=$_SESSION['usuarioactual'];
@@ -31,21 +21,23 @@
 			
 				if (!mysqli_query($enlace,"INSERT INTO preguntas(Email,Pregunta,Respuesta) 
 					VALUES('$email','".$_POST['pregunta']."','".$_POST['respuesta']."')")) {
-					echo "<script>alert('ERROR: Fallo en la inserción de la pregunta');</script>";
+//					echo "<script>alert('ERROR: Fallo en la inserción de la pregunta');</script>";
+					echo "<p><b>ERROR: Fallo en la inserción de la pregunta</b></p>";
 				}else{
-					echo "<div class='centro'>";
+//					echo "<div class='centro'>";
 					echo "<p><b>EXITO: Se ha insertado correctamente la pregunta en la BD</p></b><br> ";
-					echo "<p><a href='menu_usuario.php'>Volver al menu de usuario</a></p></div><br><br>";
+//					echo "<p><a href='menu_usuario.php'>Volver al menu de usuario</a></p></div><br><br>";
 					
 				}
 		}else{
 			if (!mysqli_query($enlace,"INSERT INTO preguntas(Email,Pregunta,Respuesta,Complejidad) 
 					VALUES('$email','".$_POST['pregunta']."','".$_POST['respuesta']."','".$_POST['complex']."')")) {
-					echo "<script>alert('ERROR: Fallo en la inserción de la pregunta');</script>";
+//					echo "<script>alert('ERROR: Fallo en la inserción de la pregunta');</script>";
+					echo "<p><b>ERROR: Fallo en la inserción de la pregunta</b></p>";
 			}else{
-					echo "<div class='centro'>";
+//					echo "<div class='centro'>";
 					echo "<p><b>EXITO: Se ha insertado correctamente la pregunta en la BD</p></b><br> ";
-					echo "<p><a href='menu_usuario.php'>Volver al menu de usuario</a></p></div><br><br>";
+//					echo "<p><a href='menu_usuario.php'>Volver al menu de usuario</a></p></div><br><br>";
 			}
 			
 		}
@@ -66,55 +58,16 @@
 			$correctResponse->addChild("value", $_POST['respuesta']);
 				
 		if($preguntas->asXML("preguntas.xml")){
-			echo "<div class='centro'>";
+//			echo "<div class='centro'>";
 			echo "<p><b>EXITO: Se ha insertado correctamente la pregunta en Xml</p></b><br> ";
-			echo "<p><a href='VerPreguntasXML.php'>Visualizar preguntas del Xml</a></p></div>";
+//			echo "<p><a href='VerPreguntasXML.php'>Visualizar preguntas del Xml</a></p></div>";
 		}else{
-			echo "<div class='centro'>";
+//			echo "<div class='centro'>";
 			echo "<p><b>ERROR: Ha ocurrido un error en la inserción de preguntas en el Xml</p></b><br> ";
-			echo "<p><a href='menu_usuario.php'>Volver al menu de usuario</a></p></div>";
+//			echo "<p><a href='menu_usuario.php'>Volver al menu de usuario</a></p></div>";
 		}
 		
 			
 			mysqli_close($enlace);	
-	}else{
-	?>
-	<h2>Insertar Preguntas</h2><br>
-
-
-	<div class="centro">
-
-	<p><b>Los campos con * son obligatorios.</b></p><br><br>
-
-	<form action="InsertarPregunta.php" enctype="multipart/form-data" id='insertar' name='insertar' method="POST">
-	  
-	  Texto de la Pregunta:*
-	  <input title="Pregunta" type="text" name="pregunta" id="pregunta" required><br><br>
-
-	  Texto de la Respuesta:*
-	  <input title="Respuesta" type="text" name="respuesta" id="respuesta" required><br><br>
-	
-	  Complejidad:
-	  <select name="complex" id="complex">
-		<option value=""></option>
-		<option value="1">1</option>
-		<option value="2">2</option>
-		<option value="3">3</option>
-		<option value="4">4</option>
-		<option value="5">5</option>
-	  </select><br><br>
-	  
-	  Subject:*
-	  <input title="Tema" type="text" name="tema" id="tema" required><br><br>
-	 
-	  <input type="submit" id="btn_ins" value="Insertar Pregunta"/>
-	  
-	  <p style="text-align:center"><a href='menu_usuario.php'>Volver atrás</a></p>
-	</form>
-
-	</div>
-	<?php
-	 }
-	 ?>
-</body>
-</html>
+	}
+?>

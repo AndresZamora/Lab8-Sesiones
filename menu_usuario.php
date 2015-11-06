@@ -9,9 +9,8 @@
 <body>
 	<H1>Menu Usuario: <?php echo $_SESSION['usuarioactual'];?></H1></br>
 	
-	<div class='centro'>
-		<span class="right"><a href="InsertarPregunta.php">Insertar Pregunta</a></span>
-      	<span class="right"><a href="VerPreguntas.php">Ver Preguntas</a></span>
+	<div class='centro'>		
+		<span class="right"><a href="GestionPreguntas.php">Editar Pregunta</a></span>
 		<span class="right"><a href="cerrar.php">Logout</a></span>
 	</div></br>
 </body>
