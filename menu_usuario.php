@@ -11,6 +11,7 @@
 	
 	<div class='centro'>		
 		<span class="right"><a href="GestionPreguntas.php">Editar Pregunta</a></span>
+		<span class="right"><a href="GestionPreguntasJquery.php">Editar Pregunta Jquery</a></span>
 		<span class="right"><a href="cerrar.php">Logout</a></span>
 	</div></br>
 </body>

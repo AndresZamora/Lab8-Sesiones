@@ -43,25 +43,29 @@
 	
 		
 		function RefrescarNumeros(){
-			VerNumeroPreguntas();
-			setInterval(VerNumeroPreguntas, 5000);
+			VerNumeroPreguntas1();
+			setInterval(VerNumeroPreguntas1, 5000);
 		}
 		
-		function VerNumeroPreguntas() {
-			var xmlhttp = new XMLHttpRequest();
-			xmlhttp.onreadystatechange = function() {
-				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-					document.getElementById("numPreguntas").innerHTML = xmlhttp.responseText;
+		//Usando Ajax con Jquery
+		function VerNumeroPreguntas1(){
+			$.ajax({   
+				type: "GET",
+				url:"ObtenerNumPreguntas.php",
+				success: function(result){
+					$("#numPreguntas").html(result);
 				}
-			}		
-			xmlhttp.open("GET","ObtenerNumPreguntas.php",true);
-			xmlhttp.send();
+			});
 		}
-
+		
+		$(window).load(function(){
+			RefrescarNumeros();
+		});
+		
 </script>
 
-<body onload="RefrescarNumeros()">
-	<h2>Editar Preguntas sin Jquery</h2><br>
+<body>
+	<h2>Editar Preguntas con Jquery</h2><br>
 
 
 	<div class="centro">
