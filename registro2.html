@@ -61,6 +61,43 @@
 			}
             document.getElementById('imagen').addEventListener('change', elegir_imagen, false);
 		});
+		
+		//Funcion que se comunica con cliente.php para consumir servicios web TAREA 1
+		function ComprobarEmail() {
+			var email=document.getElementById("email").value;			
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					if(xmlhttp.responseText.toString().search("SI")!=-1){
+						document.getElementById("txtHint").innerHTML = "<p><b><font color=green>El Email es Correcto</font></b></p>";
+						document.getElementById("btn_env").disabled=false;
+					}else{
+						document.getElementById("txtHint").innerHTML = "<p><b><font color=red>El Email es Incorrecto</font></b></p>";
+						document.getElementById("btn_env").disabled=true;
+					}
+				}
+			}		
+			xmlhttp.open("POST","cliente.php",true);
+			xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xmlhttp.send("email="+email);
+		}
+		
+		//Función que se comunica con cliente2.php para consumir servicios web TAREA 2
+		function ComprobarPassword() {
+			var password=document.getElementById("password").value;
+			if(password!=""){
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function() {
+					if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+						document.getElementById("comprobacion2").innerHTML = xmlhttp.responseText;
+					}
+				}		
+				xmlhttp.open("POST","cliente2.php",true);
+				xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xmlhttp.send("password="+password);
+			}
+		}
+		
 	</script>
 </head>
 <body>
@@ -75,16 +112,18 @@
 
 	<form action="registrar.php" enctype="multipart/form-data" id='registro' name='registro' onSubmit="return vervalores()">
 	  Nombre:*
-	  <input title="Se necesita un nombre y dos apellidos" type="text" name="firstname" id="firstname" ><br><br>
+	  <input title="Se necesita un nombre y dos apellidos" type="text" name="firstname" id="firstname" pattern="(^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$)" required><br><br>
 <!--	  pattern="(^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$)" required-->
 	  Email:*
-	  <input title="Se necesita un email de la ehu/upv" type="text" name="email" id="email"><br><br>
+	  <input title="Se necesita un email de la ehu/upv" type="text" name="email" id="email" pattern="^([a-zA-Z])+(\d{3})+\@ikasle.ehu.e(u)?s$" onblur="ComprobarEmail()" required><br>
+	  <div id="txtHint"></div></br>
 	  Password:*
 <!-- pattern="^([a-zA-Z\d]){6,}$" required-->
-	  <input title="Se necesita una contraseña de 6 caracteres" type="password" name="password" id="password"><br><br>
+	  <input title="Se necesita una contraseña de 6 caracteres" type="password" name="password" id="password" pattern="^([a-zA-Z\d]){6,}$" onblur="ComprobarPassword()" required><br>
+	  <div id="comprobacion2"></div></br>
 	  Número de teléfono:*
 <!--	  pattern="^(\d{9})$" required-->
-	  <input title="Se necesita un número de 9 digitos" type="text" name="telephone" id="telephone"><br><br>
+	  <input title="Se necesita un número de 9 digitos" type="text" name="telephone" id="telephone" pattern="^(\d{9})$" required><br><br>
 	  
 	  Tecnologias de interés:
 	  <input type="text" name="interes" id="tecnologia"><br><br>
@@ -101,7 +140,9 @@
 	  <button type="button" id="btn_esp">Cambiar especialidad</button>
 	  <br id="s1"><br id="s2">
 	  
-	  <input type="submit" id="btn_env" value="Enviar"/>
+	  <button type="button" onclick="ComprobarPassword()">Comprobar</button></br>
+	  
+	  <input type="submit" id="btn_env" value="Enviar" disabled/>
 	  
 	</form>
 
