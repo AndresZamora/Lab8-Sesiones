@@ -12,12 +12,7 @@
 	//e imprimimos lo que nos devuelve
 	if (isset($_POST['password'])){
 		$result = $soapclient->call('comprobarPass',array( 'x'=>$_POST['password']));
-		
-		if($result=="VALIDO"){
-			echo "<p><b><font color=green>El Password es VALIDO</font></b></p>";
-		}else if($result=="INVALIDO"){
-			echo "<p><b><font color=red>El Password es INVALIDO</font></b></p>";
-		}
+		echo $result;
 		
 	}
 ?>

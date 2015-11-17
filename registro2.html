@@ -89,7 +89,14 @@
 				var xmlhttp = new XMLHttpRequest();
 				xmlhttp.onreadystatechange = function() {
 					if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-						document.getElementById("comprobacion2").innerHTML = xmlhttp.responseText;
+						if(xmlhttp.responseText=="VALIDO"){
+							document.getElementById("comprobacion2").innerHTML = "<p><b><font color=green>El Password es VALIDO</font></b></p>";
+							document.getElementById("btn_env").disabled=false;
+						}else{
+							document.getElementById("comprobacion2").innerHTML = "<p><b><font color=red>El Password es INVALIDO</font></b></p>";
+							document.getElementById("btn_env").disabled=true;
+						}
+						
 					}
 				}		
 				xmlhttp.open("POST","cliente2.php",true);
