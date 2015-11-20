@@ -1,5 +1,5 @@
 <?php
 session_start();
 if (!isset($_SESSION['conectado']))
-    header("location: login.php");
+    header('location:Login.php');
 ?>

@@ -1,4 +1,9 @@
-﻿<?php include ("seguridad.php");?>
+﻿<?php 
+	include ("seguridad.php");
+	if($_SESSION['rol']!="Estudiante"){
+		header('location:layout.php');
+	}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,7 +100,7 @@
 	  
 	  <button type="button" onclick="VerMisPreguntas()">Ver Preguntas</button>
 	  
-	  <p style="text-align:center"><a href='menu_usuario.php'>Volver atrás</a></p>
+	  <p style="text-align:center"><a href='layout.php'>Volver atrás</a></p>
 	</form>
 	
 	<br>

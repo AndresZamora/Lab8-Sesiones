@@ -47,7 +47,8 @@
 					echo "<script>alert('ERROR: Fallo en la inserción de la accion');</script>";
 		}		
 		
-		$preguntas = simplexml_load_file("preguntas.xml");
+		//Código para insertar las preguntas en un fichero Xml.
+/*		$preguntas = simplexml_load_file("preguntas.xml");
 								
 			$nuevo = $preguntas->addChild("assessmentItem");
 			$nuevo->addAttribute('complexity', $_POST['complex']);
@@ -58,14 +59,10 @@
 			$correctResponse->addChild("value", $_POST['respuesta']);
 				
 		if($preguntas->asXML("preguntas.xml")){
-//			echo "<div class='centro'>";
 			echo "<p><b>EXITO: Se ha insertado correctamente la pregunta en Xml</p></b><br> ";
-//			echo "<p><a href='VerPreguntasXML.php'>Visualizar preguntas del Xml</a></p></div>";
 		}else{
-//			echo "<div class='centro'>";
 			echo "<p><b>ERROR: Ha ocurrido un error en la inserción de preguntas en el Xml</p></b><br> ";
-//			echo "<p><a href='menu_usuario.php'>Volver al menu de usuario</a></p></div>";
-		}
+		}*/
 		
 			
 			mysqli_close($enlace);	

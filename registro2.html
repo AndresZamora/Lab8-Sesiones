@@ -5,6 +5,10 @@
 	<link rel='stylesheet' type='text/css' href='estilos/estilo_personal.css' />
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 	<script>
+		var valido="No";
+		var valido1="No";
+		var valido2="No";
+	
 		function vervalores(){
 			var sAux="";
 			var frm = document.getElementById("registro");
@@ -64,19 +68,21 @@
 		
 		//Funcion que se comunica con cliente.php para consumir servicios web TAREA 1
 		function ComprobarEmail() {
-			var email=document.getElementById("email").value;			
-			var xmlhttp = new XMLHttpRequest();
-			xmlhttp.onreadystatechange = function() {
-				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-					if(xmlhttp.responseText.toString().search("SI")!=-1){
-						document.getElementById("txtHint").innerHTML = "<p><b><font color=green>El Email es Correcto</font></b></p>";
-						document.getElementById("btn_env").disabled=false;
-					}else{
-						document.getElementById("txtHint").innerHTML = "<p><b><font color=red>El Email es Incorrecto</font></b></p>";
-						document.getElementById("btn_env").disabled=true;
+			var email=document.getElementById("email").value;
+			if(email!=""){
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function() {
+					if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+						if(xmlhttp.responseText.toString().search("SI")!=-1){
+							document.getElementById("txtHint").innerHTML = "<p><b><font color=green>El Email es Correcto</font></b></p>";
+							valido="Si";
+						}else{
+							document.getElementById("txtHint").innerHTML = "<p><b><font color=red>El Email es Incorrecto</font></b></p>";
+							valido="No";
+						}
 					}
 				}
-			}		
+			}
 			xmlhttp.open("POST","cliente.php",true);
 			xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			xmlhttp.send("email="+email);
@@ -91,10 +97,10 @@
 					if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 						if(xmlhttp.responseText=="VALIDO"){
 							document.getElementById("comprobacion2").innerHTML = "<p><b><font color=green>El Password es VALIDO</font></b></p>";
-							document.getElementById("btn_env").disabled=false;
+							valido1="Si";
 						}else{
 							document.getElementById("comprobacion2").innerHTML = "<p><b><font color=red>El Password es INVALIDO</font></b></p>";
-							document.getElementById("btn_env").disabled=true;
+							valido1="No";
 						}
 						
 					}
@@ -105,13 +111,37 @@
 			}
 		}
 		
+		function RefrescarComprobarPass(){
+//			setInterval(ComprobarEmail, 1500);
+			setInterval(Comprobar2Pass, 500);
+		}
+		
+		function Comprobar2Pass(){
+			var password=document.getElementById("password").value;
+			var password2=document.getElementById("password2").value;
+			
+			if(password==password2){
+				document.getElementById("comprobacion3").innerHTML = "<p><b><font color=green>Los Passwords COINCIDEN</font></b></p>";
+				valido2="Si";
+			}else{
+				document.getElementById("comprobacion3").innerHTML = "<p><b><font color=red>Los Passwords NO COINCIDEN</font></b></p>";
+				valido2="No";
+			}
+			
+			if((valido=="Si")&&(valido1=="Si")&&(valido2=="Si")){
+				document.getElementById("btn_env").disabled=false;
+			}else{
+				document.getElementById("btn_env").disabled=true;
+			}
+		}
+		
 	</script>
 </head>
 <body>
 
 <h2>Registro</h2><br>
 
-<p style="text-align:center"><a href='layout.html'>Volver inicio</a></p>
+<p style="text-align:center"><a href='layout.php'>Volver inicio</a></p>
 
 <div class="centro">
 
@@ -122,12 +152,16 @@
 	  <input title="Se necesita un nombre y dos apellidos" type="text" name="firstname" id="firstname" pattern="(^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$)" required><br><br>
 <!--	  pattern="(^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\s[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$)" required-->
 	  Email:*
-	  <input title="Se necesita un email de la ehu/upv" type="text" name="email" id="email" pattern="^([a-zA-Z])+(\d{3})+\@ikasle.ehu.e(u)?s$" onblur="ComprobarEmail()" required><br>
+	  <input title="Se necesita un email de la ehu/upv" type="text" name="email" id="email" pattern="^([a-zA-Z])+(\d{3})+\@ikasle.ehu.e(u)?s$" onchange="ComprobarEmail()" required><br>
 	  <div id="txtHint"></div></br>
 	  Password:*
 <!-- pattern="^([a-zA-Z\d]){6,}$" required-->
-	  <input title="Se necesita una contraseña de 6 caracteres" type="password" name="password" id="password" pattern="^([a-zA-Z\d]){6,}$" onblur="ComprobarPassword()" required><br>
+	  <input title="Se necesita una contraseña de 6 caracteres" type="password" name="password" id="password" pattern="^([a-zA-Z\d]){6,}$" onchange="ComprobarPassword()" required><br>
 	  <div id="comprobacion2"></div></br>
+	   Repetir Password:*
+<!-- pattern="^([a-zA-Z\d]){6,}$" required-->
+	  <input title="Repetir la contraseña ingresada" type="password" name="password2" id="password2" pattern="^([a-zA-Z\d]){6,}$" onblur="RefrescarComprobarPass()" required><br>
+	  <div id="comprobacion3"></div></br>
 	  Número de teléfono:*
 <!--	  pattern="^(\d{9})$" required-->
 	  <input title="Se necesita un número de 9 digitos" type="text" name="telephone" id="telephone" pattern="^(\d{9})$" required><br><br>

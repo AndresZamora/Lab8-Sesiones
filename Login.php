@@ -34,8 +34,17 @@
 			$_SESSION['conectado']=1 ;
 			$_SESSION['usuarioactual'] = $user; //nombre del usuario logueado.
 			echo "<script>alert('Usuario conectado correctamente')</script>";
-			header("Location: menu_usuario.php"); /* Redirección del navegador */
-			exit;
+			
+			if((strpbrk($user, '@')=="@ikasle.ehu.es")||(strpbrk($user, '@')=="@ikasle.ehu.eus")){
+				$_SESSION['rol'] = "Estudiante";
+				header("Location: layout.php"); /* Redirección del navegador */
+				exit;
+			}else if(strpbrk($user, '@')=="@ehu.es"){
+				$_SESSION['rol'] = "Profesor";
+				header("Location: layout.php"); /* Redirección del navegador */
+				exit;
+			}
+			
 		}
 		
 		if ($esta==0){
@@ -45,14 +54,14 @@
 	?>
 
 		<h2>Login</h2><br>
-		<p style="text-align:center"><a href='layout.html'>Volver inicio</a></p>
+		<p style="text-align:center"><a href='layout.php'>Volver inicio</a></p>
 		<div class="centro">
 
 			<p><b>Los campos con * son obligatorios.</b></p><br><br>
 
 			<form action="Login.php" enctype="multipart/form-data" id='login' name='login' method="POST">
 			  Email:*
-			  <input title="Se necesita un email de la ehu/upv" type="text" name="email" id="email" pattern="(^([a-zA-Z])+(\d{3})+\@ikasle.ehu.e(u)?s$)" required><br><br>
+			  <input title="Se necesita un email de la ehu/upv" type="text" name="email" id="email" pattern="(^([a-zA-Z])+(\d{3})+\@(ikasle.)?ehu.e(u)?s$)" required><br><br>
 			  Password:*
 		<!-- pattern="^([a-zA-Z\d]){6,}$" required-->
 			  <input title="Se necesita una contraseña de 6 caracteres" type="password" name="password" id="password" pattern="^([a-zA-Z\d]){6,}$" required><br><br>
